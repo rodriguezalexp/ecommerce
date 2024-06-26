@@ -1,6 +1,7 @@
 const dotenv = require("dotenv").config();
-const mongoose = require("moongose");
+const mongoose = require("mongoose")
 const cors = require("cors");
 const express = require("express");
-const bodyparser = require("body-parser");
+const bodyParser = require("body-parser");
 
+const app = express() // starting express

@@ -6,6 +6,12 @@ const bodyParser = require("body-parser");
 
 const app = express(); // starting express
 
+//Middlewares (Handle Json data into app)
+
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
 // Routes
 
 app.get("/", (req, res) => {

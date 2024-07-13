@@ -26,17 +26,18 @@ const userSchema = mongoose.Schema({
         require: [true, "please add a photo"],
         default: ""
     },
-    phoneNumber: {
+    phone: {
         type: String,
         default: "+54"
     },
     bio: {
         type: String,
         default: "please write something about you",
-        maxLenght: [500, "The max length is 500 characters"]
+        maxLenght: [500, "The max length is 500 characters"],
     }
+},  {
+        timestamps: true // add created_at and updated_at to each property created
 });
 
 const User = mongoose.model("User", userSchema)
-const Email = mongoose.model("Email", userSchema)
-module.exports = User, Email
+module.exports = User

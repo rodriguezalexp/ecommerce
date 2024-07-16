@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
+const UserRoute = require("./routes/userRoute")
 
 const app = express(); // starting express
 
@@ -11,6 +12,10 @@ const app = express(); // starting express
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+// Routes Middlewares
+
+app.use("/api/users", UserRoute);
 
 // Routes
 

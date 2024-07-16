@@ -3,7 +3,7 @@ const mongoose = require("mongoose") /* importacion de mongoose */
 const userSchema = mongoose.Schema({
     name: {
         type: String,
-        require: [true, "Please add a name"] 
+        require: [true, "Please add a name"]
     },
     email: {
         type: String,
@@ -11,8 +11,7 @@ const userSchema = mongoose.Schema({
         unique: true,
         trim: true, // delete whitespaces
         match: [
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,"Please enter a valid email"
-        ]
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "Please enter a valid email"]
     },
     password: {
         type: String,
@@ -35,8 +34,8 @@ const userSchema = mongoose.Schema({
         default: "please write something about you",
         maxLenght: [500, "The max length is 500 characters"],
     }
-},  {
-        timestamps: true // add created_at and updated_at to each property created
+}, {
+    timestamps: true // add created_at and updated_at to each property created
 });
 
 const User = mongoose.model("User", userSchema)

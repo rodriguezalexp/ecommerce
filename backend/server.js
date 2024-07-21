@@ -4,6 +4,7 @@ const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
 const userRoute = require("./routes/userRoute")
+const errorHandler = require("./middleWare/errorMiddleware")
 
 const app = express(); // starting express
 
@@ -23,6 +24,9 @@ app.get("/", (req, res) => {
     res.send("Home Page")
 });
 
+// Error Middlewares
+
+app.use(errorHandler) //Set and calling error handler
 
 // Connect to DB and start server
 

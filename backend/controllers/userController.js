@@ -28,7 +28,7 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new Error("The email already exists");
     }
 
-    //Create new user
+    //Generate new token
 
     const user = await User.create({
         name,
@@ -36,10 +36,23 @@ const registerUser = asyncHandler(async (req, res) => {
         password,
     });
 
+    //Create new user
+    const token = genetareToken(user._id);
+
+    // send HTTP-only cookie
+    res.cookie("token", token, {
+        path: "/",
+        httpOnly: true,
+        expires: new Date(Date.now() + 1000 * 86),
+        sameSite: "none",
+        secure: true,
+    })
+
+
     if (user) {
         const {_id, name, email, photo, phone, bio} = user
         res.status(201).json({
-            _id, name, email, photo, phone, bio,
+            _id, name, email, photo, phone, bio, token,
         });
     } else {
 
@@ -47,6 +60,13 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 
+// Login user
+
+const loginUser = asyncHandler( async (req, res) => {
+    res.send("login User");
+});
+
 module.exports = {
     registerUser,
+    loginUser,
 };

@@ -6,8 +6,9 @@ const router = express.Router();
 
 router.post("/register", registerUser); // post information from front to backend
 router.post("/login", loginUser);
-router.get("/logout", logout)
-router.get("/getuser", getUser)
+router.get("/logout", logout);
+router.get("/getuser", getUser);
+
 
 
 module.exports = router

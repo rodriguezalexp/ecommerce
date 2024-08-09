@@ -1,5 +1,6 @@
 const express = require("express");
-const { registerUser, loginUser, logout, getUser } = require("../controllers/userController");
+const { registerUser, loginUser, logout, getUser} = require("../controllers/userController");
+const protect = require("../middleWare/authMiddleware")
 const router = express.Router();
 
 //const registerUser = () => {};
@@ -7,7 +8,7 @@ const router = express.Router();
 router.post("/register", registerUser); // post information from front to backend
 router.post("/login", loginUser);
 router.get("/logout", logout);
-router.get("/getuser", getUser);
+router.get("/getuser", protect, getUser);
 
 
 

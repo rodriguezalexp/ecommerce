@@ -132,14 +132,19 @@ const getUser = asyncHandler ( async (req, res) => {
         });
     } else {
         res.status(400);
-        throw new Error("Invalid User data");
+        throw new Error("User not found");
     }
-}); 
+});
 
+//get loggin status
+const logginStatus = asyncHandler ( async (req, res) => {
+    req.send("Login status")
+});
 
 module.exports = {
     registerUser,
     loginUser,
     logout,
     getUser,
+    logginStatus,
 };

@@ -9,7 +9,7 @@ router.post("/register", registerUser); // post information from front to backen
 router.post("/login", loginUser);
 router.get("/logout", logout);
 router.get("/getuser", protect, getUser);
-
+router.get("/loggedin", logginStatus);
 
 
 module.exports = router

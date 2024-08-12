@@ -138,8 +138,19 @@ const getUser = asyncHandler ( async (req, res) => {
 
 //get loggin status
 const logginStatus = asyncHandler ( async (req, res) => {
-    req.send("Login status")
+    const token = req.cookies.token;
+    if (!token) {
+        res.json(false)
+    }
+
+    //verify token
+    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    if (verified) {
+        res.json(true)
+    }
+    return res.json(false);
 });
+    
 
 module.exports = {
     registerUser,

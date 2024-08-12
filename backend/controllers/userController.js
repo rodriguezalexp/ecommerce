@@ -150,6 +150,12 @@ const logginStatus = asyncHandler ( async (req, res) => {
     }
     return res.json(false);
 });
+
+
+// Update user route
+const updateUser = asyncHandler (async (req, res) => {
+    res.send("User updated")
+});
     
 
 module.exports = {
@@ -158,4 +164,5 @@ module.exports = {
     logout,
     getUser,
     logginStatus,
+    updateUser,
 };

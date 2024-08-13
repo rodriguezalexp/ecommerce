@@ -158,7 +158,7 @@ const logginStatus = asyncHandler ( async (req, res) => {
 const updateUser = asyncHandler (async (req, res) => {
     const user = await User.findById(req.user._id)
     if (user) {
-        const {_id, name, email, photo, phone, bio} = user;
+        const {name, email, photo, phone, bio} = user;
         user.email = email;
         user.name = req.body.name || name;
         user.photo = req.body.photo || photo;
@@ -167,12 +167,16 @@ const updateUser = asyncHandler (async (req, res) => {
 
         const updatedUser = await user.save();
         res.status(200).json({
-            _id: updateUser._id, name: updateUser.name, email:updateUser.email, photo:updateUser.photo, phone:updateUser.phone, bio:updateUser.bio,
+            _id: updatedUser._id, name: updatedUser.name, email: updatedUser.email, photo: updatedUser.photo, phone: updatedUser.phone, bio: updatedUser.bio,
         })
     } else {
         res.status(404);
         throw new Error("User not found");
     }
+});
+
+const changePassword = asyncHandler ( async (req, res) => {
+    const user = await User.findById(req.user._id)
 });
     
 

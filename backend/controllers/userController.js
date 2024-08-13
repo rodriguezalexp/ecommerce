@@ -187,4 +187,5 @@ module.exports = {
     getUser,
     logginStatus,
     updateUser,
+    changePassword,
 };

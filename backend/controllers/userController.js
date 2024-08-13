@@ -131,7 +131,7 @@ const getUser = asyncHandler ( async (req, res) => {
             _id, name, email, photo, phone, bio,
         });
     } else {
-        res.status(400);
+        res.status(404);
         throw new Error("User not found");
     }
 });
@@ -153,8 +153,26 @@ const logginStatus = asyncHandler ( async (req, res) => {
 
 
 // Update user route
+
+// this route user is protected, req.user._id is the token
 const updateUser = asyncHandler (async (req, res) => {
-    res.send("User updated")
+    const user = await User.findById(req.user._id)
+    if (user) {
+        const {_id, name, email, photo, phone, bio} = user;
+        user.email = email;
+        user.name = req.body.name || name;
+        user.photo = req.body.photo || photo;
+        user.phone = req.body.phone || phone;
+        user.bio = req.body.bio || bio;
+
+        const updatedUser = await user.save();
+        res.status(200).json({
+            _id: updateUser._id, name: updateUser.name, email:updateUser.email, photo:updateUser.photo, phone:updateUser.phone, bio:updateUser.bio
+        })
+    } else {
+        res.status(404);
+        throw new Error("User not found");
+    }
 });
     
 

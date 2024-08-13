@@ -10,7 +10,7 @@ router.post("/login", loginUser);
 router.get("/logout", logout);
 router.get("/getuser", protect, getUser);
 router.get("/loggedin", logginStatus);
-router.patch("/updateuser", updateUser);
+router.patch("/updateuser", protect, updateUser);
 
 
 module.exports = router

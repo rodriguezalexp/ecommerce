@@ -176,9 +176,39 @@ const updateUser = asyncHandler (async (req, res) => {
 });
 
 const changePassword = asyncHandler ( async (req, res) => {
-    const user = await User.findById(req.user._id)
+    const user = await User.findById(req.user._id);
+
+    const {oldPassword, password} = req.body;
+
+    if (!user) {
+        res.status(400);
+        throw new Error("User not found, please login or singup");
+    }
+
+    // Validate
+    if (!oldPassword || !password) {
+        res.status(400);
+        throw new Error("Please enter the required fields");
+    }
+
+    //check if password matched in DB
+    const passwordIsCorrect = await bcrypt.compare(oldPassword, user.password)
+
+    if (user && passwordIsCorrect) {
+        user.password = password;
+        await user.save()
+        res.status(200).send("password changed")
+    } else {
+        res.status(400);
+        throw new Error("passwords don't match")
+    }
+
 });
-    
+
+// Forgot password route
+const forgotPassword = asyncHandler ( async (req, res) => {
+    res.send("please enter your email")
+})
 
 module.exports = {
     registerUser,
@@ -188,4 +218,5 @@ module.exports = {
     logginStatus,
     updateUser,
     changePassword,
+    forgotPassword,
 };

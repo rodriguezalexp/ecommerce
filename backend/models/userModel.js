@@ -2,6 +2,7 @@ const mongoose = require("mongoose") /* importacion de mongoose */
 const bcrypt = require("bcryptjs")
 
 
+
 const userSchema = mongoose.Schema({
     name: {
         type: String,

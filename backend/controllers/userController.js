@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler")
 const User = require("../models/userModel")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
+const Token = require("../models/tokenModel")
 
 //login user
 const genetareToken = (id) => {
@@ -206,8 +207,14 @@ const changePassword = asyncHandler ( async (req, res) => {
 });
 
 // Forgot password route
-const forgotPassword = asyncHandler ( async (req, res) => {
-    res.send("please enter your email")
+const forgotPassword = asyncHandler ( async (req, res) =>{
+    const {email} = req.body
+    const user = await User.findOne({email})
+
+    if (!user) {
+        res.status(400)
+        throw new Error("User not exists")
+    }
 })
 
 module.exports = {
